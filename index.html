@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <center><title>Papeleria del CECyTEM</title>
+        <h1>Papeleria del CECyTEM</h1>
+    <p>Nombre del estudiante</p>
+    <input type="text" id="nombre">
+    <p>cantidad de copias:</p>
+    <input type="number" id="numCopias">
+    <p>Tipo de copias</p>
+    <select id="tipo">
+        <option value="color">Color</option>
+        <option value="byn">Blanco y Negro</option>
+        </center>
+    </select>
+    <p>
+  <input type="checkbox" id="esAlumno"> Es alumno, presenta credencial =25% de descuento
+</p>
+<button onclick="calcular()">Calcular</button>
+<p id="resultado"></p>
+<script>
+function calcular() {
+  let nombre = document.getElementById("nombre").value;
+  let num = parseInt(document.getElementById("numCopias").value);
+  let tipo = document.getElementById("tipo").value;
+  let esAlumno = document.getElementById("esAlumno").checked;
+  if (!nombre || !num || num <= 0) {
+    alert("Escribe nombre y número de copias");
+    return;
+  }
+  let precio = 0;
+  if (num >= 1 && num <= 50) {
+    precio = (tipo == "color") ? 1.50 : 1.00;
+  } else if (num >= 51 && num <= 100) {
+    precio = (tipo == "color") ? 1.30 : 0.80;
+  } else {
+    precio = (tipo == "color") ? 1.00 : 0.50;
+  }
+  let subtotal = num * precio;
+  let descuento = 0;
+  if (esAlumno) {
+    descuento = subtotal * 0.25;
+  }
+  let total = subtotal - descuento;
+  document.getElementById("resultado").innerHTML =
+    "Cliente: " + nombre + "<br>" +
+    "Copias: " + num + "<br>" +
+    "Precio por copia: $" + precio.toFixed(2) + "<br>" +
+    "Subtotal: $" + subtotal.toFixed(2) + "<br>" +
+    "Descuento: $" + descuento.toFixed(2) + "<br>" +
+    "Total a pagar: $" + total.toFixed(2);
+}
+    </script>
+</body>
+</html>
